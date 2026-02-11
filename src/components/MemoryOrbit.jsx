@@ -3,9 +3,9 @@ import { motion } from 'framer-motion';
 
 
 const MEMORIES = [
-  { id: 1, img: "public/WhatsApp Image 2026-02-11 at 20.13.50.jpeg", title: "The Beginning", date: "Phase 1" },
-  { id: 2, img: "public/WhatsApp Image 2026-02-11 at 20.13.52.jpeg", title: "The Chaos", date: "Phase 2" },
-  { id: 3, img: "public/WhatsApp Image 2026-02-11 at 20.13.55.jpeg", title: "The Forever", date: "Phase 3" },
+  { id: 1, img: "/WhatsApp Image 2026-02-11 at 20.13.50.jpeg", title: "The Beginning", date: "Phase 1" },
+  { id: 2, img: "/WhatsApp Image 2026-02-11 at 20.13.52.jpeg", title: "The Chaos", date: "Phase 2" },
+  { id: 3, img: "/WhatsApp Image 2026-02-11 at 20.13.55.jpeg", title: "The Forever", date: "Phase 3" },
 ];
 
 const MemoryOrbit = ({ onComplete }) => {
