@@ -2,24 +2,24 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const MEMORIES = [
-  { 
+ { 
     id: 1, 
-    img: "/WhatsApp Image 2026-02-11 at 20.13.50.jpeg", 
-    title: "The Beginning", 
+    img: "/WhatsApp Image 2026-02-11 at 20.48.45.jpeg", 
+    title: "The Soul", 
     date: "Phase 1",
-    label: "SATHI" 
+    label: "SATI" 
   },
   { 
     id: 2, 
-    img: "/WhatsApp Image 2026-02-11 at 20.13.52.jpeg", 
-    title: "The Chaos", 
+    img: "/WhatsApp Image 2026-02-11 at 20.13.50.jpeg", 
+    title: "The Grace", 
     date: "Phase 2",
     label: "LAKSHMI" 
   },
   { 
     id: 3, 
-    img: "/WhatsApp Image 2026-02-11 at 20.13.55.jpeg", 
-    title: "The Forever", 
+    img: "/WhatsApp Image 2026-02-11 at 20.48.26.jpeg", 
+    title: "The Divine", 
     date: "Phase 3",
     label: "NARAYANI" 
   },
