@@ -1,8 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const HeartCore = () => {
   const [accepted, setAccepted] = useState(false);
+  
+
+  const [noPosition, setNoPosition] = useState({ x: 0, y: 0 });
+
+ 
+  const moveNoButton = () => {
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 200 - 100; 
+    setNoPosition({ x, y });
+  };
 
   if (accepted) {
     return (
@@ -15,42 +25,64 @@ const HeartCore = () => {
           FOREVER <br/> BOUND
         </h1>
         <p className="mt-6 text-white text-xl font-light">See you on the 14th.</p>
+        
+        {/* Added a reset button for testing/replayability */}
+        <button 
+            onClick={() => setAccepted(false)}
+            className="mt-12 text-gray-500 text-xs uppercase tracking-widest hover:text-white transition-colors"
+        >
+            Reset System
+        </button>
       </motion.div>
     );
   }
 
   return (
-    <div className="z-20 h-full flex flex-col items-center justify-center space-y-12">
+    <div className="z-20 h-full flex flex-col items-center justify-center space-y-12 px-4">
+      {/* Heartbeat Animation */}
       <div className="relative">
         <motion.div
-          animate={{ scale: [1, 1.1, 1] }}
+          animate={{ scale: [1, 1.2, 1] }}
           transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut" }}
         >
-           <svg viewBox="0 0 24 24" fill="currentColor" className="w-40 h-40 text-red-600 drop-shadow-[0_0_50px_rgba(220,38,38,0.8)]">
+           <svg viewBox="0 0 24 24" fill="currentColor" className="w-32 h-32 md:w-40 md:h-40 text-red-600 drop-shadow-[0_0_35px_rgba(220,38,38,0.8)]">
              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
            </svg>
         </motion.div>
       </div>
 
-      <div className="text-center space-y-2">
-        <h2 className="text-3xl text-white font-bold">Priority Message</h2>
+      <div className="text-center space-y-4">
+        <h2 className="text-3xl text-white font-bold tracking-tight">Priority Message</h2>
         <p className="text-gray-400">Will you be my Valentine?</p>
       </div>
 
-      <div className="flex gap-4">
+      <div className="flex flex-col md:flex-row gap-6 items-center w-full justify-center relative min-h-[100px]">
+        {/* YES Button */}
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setAccepted(true)}
-          className="px-8 py-3 bg-green-500 text-white font-bold rounded-lg shadow-lg shadow-green-500/30"
+          className="z-50 px-10 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold rounded-xl shadow-[0_0_20px_rgba(34,197,94,0.5)] border border-green-400/30"
         >
           YES
         </motion.button>
         
-        {/* The Trick Button - Moves when you try to click NO */}
+        {/* The IMPOSSIBLE NO Button */}
         <motion.button
-          whileHover={{ x: Math.random() * 100 - 50, y: Math.random() * 100 - 50 }}
-          className="px-8 py-3 bg-gray-800 text-gray-400 font-bold rounded-lg border border-gray-700"
+            // Use 'animate' to bind position to state
+            animate={{ x: noPosition.x, y: noPosition.y }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            
+            // Desktop: Run away on hover
+            onMouseEnter={moveNoButton}
+            
+            // Mobile: Run away on touch start (happens before click)
+            onTouchStart={moveNoButton}
+            
+            // Fail-safe: If they somehow click it, move it anyway
+            onClick={moveNoButton}
+            
+            className="px-10 py-4 bg-gray-800/80 backdrop-blur-sm text-gray-400 font-bold rounded-xl border border-gray-700 w-32"
         >
           NO
         </motion.button>
