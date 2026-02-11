@@ -44,13 +44,10 @@ const MemoryOrbit = ({ onComplete }) => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.8, type: "spring" }}
-            // ROW LOGIC:
-            // Index 0 (Sathi) & 2 (Narayani): Image Left, Gap Right -> flex-row
-            // Index 1 (Lakshmi): Image Right, Gap Left -> flex-row-reverse
+       
             className={`flex w-full items-center ${index % 2 !== 0 ? 'flex-row-reverse' : 'flex-row'}`}
           >
-            
-            {/* 1. The Image Card (Fixed Size) */}
+          
             <div className="relative group shrink-0">
               <div className="absolute -inset-1 bg-gradient-to-br from-pink-600 to-purple-600 rounded-2xl blur opacity-60 group-hover:opacity-100 transition duration-1000"></div>
               <div className="relative p-1 bg-black rounded-2xl overflow-hidden shadow-2xl border border-white/10">
