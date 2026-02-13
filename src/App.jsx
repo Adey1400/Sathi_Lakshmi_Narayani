@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import GalaxyBackground from './components/GalaxyBackground';
 import BiometricLock from './components/BiometricLock';
 import MemoryOrbit from './components/MemoryOrbit';
-import MemoryDump from './components/MemoryDump'; // Import the new component
+import MemoryDump from './components/MemoryDump';
 import HeartCore from './components/HeartCore';
 import { AnimatePresence, motion } from 'framer-motion';
 
 function App() {
   // Stages: 
   // 0 = Lock Screen
-  // 1 = Orbit (Timeline)
-  // 2 = Memory Dump (Scattered Polaroids)
-  // 3 = Heart Core (Proposal)
+  // 1 = Orbit (Timeline: Sati/Lakshmi/Narayani)
+  // 2 = Heart Core (The Proposal & Message)
+  // 3 = Memory Dump (The 4 Final Photos)
   const [stage, setStage] = useState(0); 
 
   return (
@@ -35,52 +35,54 @@ function App() {
             </motion.div>
           )}
 
-          {/* STAGE 1: ORBIT (The 3 Goddess Photos) */}
+          {/* STAGE 1: MEMORY ORBIT */}
           {stage === 1 && (
             <motion.div
               key="memories"
               initial={{ opacity: 0, y: 100 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, x: -100, filter: "blur(5px)" }} // Slides away
+              exit={{ opacity: 0, x: -100, filter: "blur(5px)" }}
               transition={{ duration: 0.5 }}
               className="h-full"
             >
+              {/* Moves to Heart Core next */}
               <MemoryOrbit onComplete={() => setStage(2)} />
             </motion.div>
           )}
 
-          {/* STAGE 2: MEMORY DUMP (The Chaos) */}
+          {/* STAGE 2: HEART CORE (PROPOSAL) */}
           {stage === 2 && (
+            <motion.div
+              key="heart"
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, y: -50, scale: 1.1 }}
+              transition={{ type: "spring", duration: 1, bounce: 0.5 }}
+              className="h-full"
+            >
+              {/* Moves to Memory Dump next */}
+              <HeartCore onComplete={() => setStage(3)} />
+            </motion.div>
+          )}
+
+          {/* STAGE 3: MEMORY DUMP (FINAL) */}
+          {stage === 3 && (
             <motion.div
               key="dump"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              // The "Black Hole" Exit: Everything spirals into nothingness
-              exit={{ opacity: 0, scale: 0, rotate: 180 }}
-              transition={{ duration: 0.8, ease: "easeInOut" }}
+              transition={{ duration: 0.8 }}
               className="h-full"
             >
-              <MemoryDump onComplete={() => setStage(3)} />
-            </motion.div>
-          )}
-
-          {/* STAGE 3: HEART CORE (The Proposal) */}
-          {stage === 3 && (
-            <motion.div
-              key="heart"
-              initial={{ opacity: 0, scale: 0.5 }} // Starts small after the vortex
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ type: "spring", duration: 1, bounce: 0.5 }}
-              className="h-full"
-            >
-              <HeartCore />
+              {/* No exit action, this is the end */}
+              <MemoryDump />
             </motion.div>
           )}
 
         </AnimatePresence>
       </main>
       
-      {/* S24 Aesthetic Border (Hidden on mobile, visible on PC testing) */}
+      {/* S24 Aesthetic Border (Hidden on mobile) */}
       <div className="fixed inset-0 pointer-events-none border-[12px] border-black rounded-[40px] opacity-100 z-50 md:block hidden"></div>
     </div>
   );
